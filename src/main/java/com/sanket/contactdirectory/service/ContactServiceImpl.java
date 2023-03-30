@@ -21,13 +21,17 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> getAllContacts() {
-        return contactRepository.findAll();
+        return (List<Contact>) contactRepository.findAll();
     }
 
     @Override
-    public Contact getContactById(Long id) {
-        Optional<Contact> optionalContact = contactRepository.findById(id);
-        return optionalContact.orElseThrow(() -> new RuntimeException("Contact not found"));
+    public Contact getContactById(long id) {
+        Optional<Contact> optionalContact = contactRepository.findById((int) id);
+        if (optionalContact.isPresent()) {
+            return optionalContact.get();
+        } else {
+            throw new RuntimeException("Contact not found for id: " + id);
+        }
     }
 
     @Override
@@ -36,21 +40,20 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact updateContact(Long id, Contact contact) {
+    public Contact updateContact(long id, Contact contact) {
         Contact existingContact = getContactById(id);
-        existingContact.setFirstName(contact.getFirstName());
-        existingContact.setLastName(contact.getLastName());
+        existingContact.setPerson(contact.getPerson());
         existingContact.setPhoneNumber(contact.getPhoneNumber());
         existingContact.setPhoneType(contact.getPhoneType());
-        existingContact.setIsPrimaryPhone(contact.getIsPrimaryPhone());
+        existingContact.setPrimaryPhone(contact.isPrimaryPhone());
         return contactRepository.save(existingContact);
     }
 
     @Override
-    public String deleteContact(Long id) {
-        Optional<Contact> optionalContact = contactRepository.findById(id);
+    public String deleteContact(long id) {
+        Optional<Contact> optionalContact = contactRepository.findById((int) id);
         if (optionalContact.isPresent()) {
-            contactRepository.deleteById(id);
+            contactRepository.deleteById((int) id);
             return "Contact deleted";
         } else {
             return "Contact not found";

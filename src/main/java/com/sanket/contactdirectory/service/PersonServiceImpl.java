@@ -12,17 +12,22 @@ import com.sanket.contactdirectory.entity.Person;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
+ 
     private PersonRepository personRepository;
+    
+    @Autowired
+    public PersonServiceImpl(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
     
     @Override
     public List<Person> getAllPersons() {
-        return personRepository.findAll();
+        return (List<Person>) personRepository.findAll();
     }
 
     @Override
-    public Person getPersonById(int id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
+    public Person getPersonById(long id) {
+        Optional<Person> optionalPerson = personRepository.findById((int) id);
         if (optionalPerson.isPresent()) {
             return optionalPerson.get();
         } else {
@@ -36,10 +41,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePerson(int id, Person person) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
-        if (optionalPerson.isPresent()) {
-            Person existingPerson = optionalPerson.get();
+    public Person updatePerson(long id, Person person) {
+    		Person existingPerson = getPersonById(id);
             existingPerson.setFirstName(person.getFirstName());
             existingPerson.setLastName(person.getLastName());
             existingPerson.setGender(person.getGender());
@@ -47,16 +50,13 @@ public class PersonServiceImpl implements PersonService {
             existingPerson.setEmails(person.getEmails());
             existingPerson.setAddresses(person.getAddresses());
             return personRepository.save(existingPerson);
-        } else {
-            throw new IllegalArgumentException("Person not found for id: " + id);
-        }
     }
 
     @Override
-    public String deletePerson(int id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
+    public String deletePerson(long id) {
+        Optional<Person> optionalPerson = personRepository.findById((int) id);
         if (optionalPerson.isPresent()) {
-            personRepository.deleteById(id);
+            personRepository.deleteById((int) id);
             return "Person is deleted";
         } else {
             return "Person doesn't exist";

@@ -8,11 +8,11 @@ public interface ContactService {
 
     List<Contact> getAllContacts();
 
-    Contact getContactById(Long id);
+    Contact getContactById(long id);
 
     Contact addContact(Contact contact);
 
-    Contact updateContact(Long id, Contact contact);
+    Contact updateContact(long id, Contact contact);
 
-    String deleteContact(Long id);
+    String deleteContact(long id);
 }

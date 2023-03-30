@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sanket.contactdirectory.entity.Email;
 
-public interface EmailRepository extends JpaRepository<Email, Long> {
+public interface EmailRepository extends JpaRepository<Email, Integer> {
 
 }
