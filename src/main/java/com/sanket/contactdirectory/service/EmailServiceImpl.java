@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sanket.contactdirectory.dao.EmailRepository;
 import com.sanket.contactdirectory.entity.Email;
 
+@Service
 public class EmailServiceImpl implements EmailService {
 
     private EmailRepository emailRepository;
@@ -25,7 +27,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public Email getEmailById(long id) {
-        Optional<Email> optionalEmail = emailRepository.findById((int) id);
+        Optional<Email> optionalEmail = emailRepository.findById(id);
         if (optionalEmail.isPresent()) {
             return optionalEmail.get();
         } else {
@@ -50,9 +52,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public String deleteEmail(long id) {
-        Optional<Email> optionalemail = emailRepository.findById((int) id);
+        Optional<Email> optionalemail = emailRepository.findById(id);
         if (optionalemail.isPresent()) {
-            emailRepository.deleteById((int) id);
+            emailRepository.deleteById(id);
             return "email is deleted";
         } else {
             return "email doesn't exist";

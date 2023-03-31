@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.sanket.contactdirectory.entity.Person;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
 }

@@ -26,7 +26,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getContactById(long id) {
-        Optional<Contact> optionalContact = contactRepository.findById((int) id);
+        Optional<Contact> optionalContact = contactRepository.findById(id);
         if (optionalContact.isPresent()) {
             return optionalContact.get();
         } else {
@@ -51,9 +51,9 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public String deleteContact(long id) {
-        Optional<Contact> optionalContact = contactRepository.findById((int) id);
+        Optional<Contact> optionalContact = contactRepository.findById(id);
         if (optionalContact.isPresent()) {
-            contactRepository.deleteById((int) id);
+            contactRepository.deleteById(id);
             return "Contact deleted";
         } else {
             return "Contact not found";

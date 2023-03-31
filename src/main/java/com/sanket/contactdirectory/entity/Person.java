@@ -32,9 +32,6 @@ public class Person {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "is_admin")
-    private boolean isAdmin;
-
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Contact> contacts;
 
@@ -54,13 +51,12 @@ public class Person {
     // constructors 
     public Person() {}
     
-    public Person(String firstName, String lastName, String gender, boolean isAdmin, List<Contact> contacts,
-			List<Email> emails, List<Address> addresses) {
+    public Person(String firstName, String lastName, String gender, boolean isAdmin, List<Contact> contacts, List<Email> emails, List<Address> addresses) {
+    	
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
-		this.isAdmin = isAdmin;
 		this.contacts = contacts;
 		this.emails = emails;
 		this.addresses = addresses;
@@ -101,14 +97,6 @@ public class Person {
 		this.gender = gender;
 	}
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
 	public List<Contact> getContacts() {
 		return contacts;
 	}
@@ -135,11 +123,12 @@ public class Person {
 
 	
     
-    //other methods
+//    other methods
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", isAdmin=" + isAdmin + ", contacts="
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender  + ", contacts="
 				+ contacts + ", emails=" + emails + ", addresses=" + addresses + "]";
+		
 	}
 	
 }

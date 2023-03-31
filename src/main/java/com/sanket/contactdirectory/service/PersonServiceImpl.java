@@ -27,7 +27,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPersonById(long id) {
-        Optional<Person> optionalPerson = personRepository.findById((int) id);
+        Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             return optionalPerson.get();
         } else {
@@ -54,9 +54,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public String deletePerson(long id) {
-        Optional<Person> optionalPerson = personRepository.findById((int) id);
+        Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
-            personRepository.deleteById((int) id);
+            personRepository.deleteById(id);
             return "Person is deleted";
         } else {
             return "Person doesn't exist";
