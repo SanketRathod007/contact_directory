@@ -8,12 +8,12 @@ public interface PersonService {
 
     List<Person> getAllPersons();
     
-    Person getPersonById(long id);
+    Person getPersonById(int id);
     
     Person addPerson(Person person);
     
-    Person updatePerson(long id, Person person);
+    Person updatePerson(int id, Person person);
     
-    String deletePerson(long id);
+    String deletePerson(int id);
     
 }

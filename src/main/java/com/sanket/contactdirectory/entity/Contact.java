@@ -2,6 +2,10 @@ package com.sanket.contactdirectory.entity;
 
 import jakarta.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,14 +17,19 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "contacts")
+@JsonIdentityInfo(
+		  scope = Contact.class, 
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id")
+    @JsonBackReference
     private Person person;
 
     @Column(name = "phone_number", nullable = false)

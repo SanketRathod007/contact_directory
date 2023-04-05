@@ -2,6 +2,9 @@ package com.sanket.contactdirectory.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
@@ -16,6 +19,10 @@ import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "address")
+@JsonIdentityInfo(
+		  scope = Address.class, 
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Address {
 
     @Id
@@ -46,6 +53,7 @@ public class Address {
     		joinColumns = @JoinColumn(name = "address_id"),
     		inverseJoinColumns = @JoinColumn(name = "person_id")
     )
+    @JsonBackReference
     private List<Person> persons;
 
 	

@@ -8,6 +8,6 @@ import com.sanket.contactdirectory.entity.Contact;
 
 
 @Repository
-public interface ContactRepository extends JpaRepository<Contact, Long> {
+public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
 }

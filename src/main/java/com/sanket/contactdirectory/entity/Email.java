@@ -2,6 +2,11 @@ package com.sanket.contactdirectory.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +17,10 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name = "emails")
+@JsonIdentityInfo(
+		  scope = Email.class, 
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Email {
 
     @Id
@@ -19,7 +28,8 @@ public class Email {
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id")
+    @JsonBackReference
     private Person person;
 
     @Column(name = "email_address", nullable = false)

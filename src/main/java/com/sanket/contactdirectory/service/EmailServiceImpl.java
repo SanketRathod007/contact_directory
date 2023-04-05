@@ -26,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Email getEmailById(long id) {
+    public Email getEmailById(int id) {
         Optional<Email> optionalEmail = emailRepository.findById(id);
         if (optionalEmail.isPresent()) {
             return optionalEmail.get();
@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Email updateEmail(long id, Email email) {
+    public Email updateEmail(int id, Email email) {
     		Email existingemail = getEmailById(id);
             existingemail.setPerson(email.getPerson());
             existingemail.setEmailAddress(email.getEmailAddress());
@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public String deleteEmail(long id) {
+    public String deleteEmail(int id) {
         Optional<Email> optionalemail = emailRepository.findById(id);
         if (optionalemail.isPresent()) {
             emailRepository.deleteById(id);

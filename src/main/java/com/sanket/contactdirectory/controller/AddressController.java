@@ -33,7 +33,7 @@ public class AddressController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Address> getAddressById(@PathVariable long id) {
+    public ResponseEntity<Address> getAddressById(@PathVariable int id) {
         try {
             Address address = addressService.getAddressById(id);
             return ResponseEntity.ok(address);
@@ -48,7 +48,7 @@ public class AddressController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Address> updateAddress(@PathVariable long id, @RequestBody Address address) {
+    public ResponseEntity<Address> updateAddress(@PathVariable int id, @RequestBody Address address) {
         try {
             Address updatedAddress = addressService.updateAddress(id, address);
             return ResponseEntity.ok(updatedAddress);
@@ -58,7 +58,7 @@ public class AddressController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAddress(@PathVariable long id) {
+    public ResponseEntity<String> deleteAddress(@PathVariable int id) {
         String result = addressService.deleteAddress(id);
         if (result.equals("Address is deleted")) {
             return ResponseEntity.ok(result);

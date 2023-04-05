@@ -33,7 +33,7 @@ public class PersonController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getPersonById(@PathVariable long id) {
+    public ResponseEntity<Person> getPersonById(@PathVariable int id) {
         try {
             Person person = personService.getPersonById(id);
             return ResponseEntity.ok(person);
@@ -42,13 +42,15 @@ public class PersonController {
         }
     }
     
-    @PostMapping
+    @PostMapping(consumes = {"application/xml","application/json"})
     public Person addPerson(@RequestBody Person person) {
+    	person.setId(0l);
+    	System.out.println(person.toString());
         return personService.addPerson(person);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable long id, @RequestBody Person person) {
+    public ResponseEntity<Person> updatePerson(@PathVariable int id, @RequestBody Person person) {
         try {
             Person updatedPerson = personService.updatePerson(id, person);
             return ResponseEntity.ok(updatedPerson);
@@ -58,7 +60,7 @@ public class PersonController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePerson(@PathVariable long id) {
+    public ResponseEntity<String> deletePerson(@PathVariable int id) {
         String result = personService.deletePerson(id);
         if (result.equals("Person is deleted")) {
             return ResponseEntity.ok(result);

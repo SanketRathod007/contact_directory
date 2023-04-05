@@ -8,12 +8,12 @@ public interface EmailService {
 
 	List<Email> getAllEmails();
     
-    Email getEmailById(long id);
+    Email getEmailById(int id);
     
     Email addEmail(Email email);
     
-    Email updateEmail(long id, Email email);
+    Email updateEmail(int id, Email email);
     
-    String deleteEmail(long id);
+    String deleteEmail(int id);
 	
 }

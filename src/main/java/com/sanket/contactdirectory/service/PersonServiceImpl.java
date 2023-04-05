@@ -26,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getPersonById(long id) {
+    public Person getPersonById(int id) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             return optionalPerson.get();
@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePerson(long id, Person person) {
+    public Person updatePerson(int id, Person person) {
     		Person existingPerson = getPersonById(id);
             existingPerson.setFirstName(person.getFirstName());
             existingPerson.setLastName(person.getLastName());
@@ -53,7 +53,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public String deletePerson(long id) {
+    public String deletePerson(int id) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isPresent()) {
             personRepository.deleteById(id);

@@ -25,7 +25,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getContactById(long id) {
+    public Contact getContactById(int id) {
         Optional<Contact> optionalContact = contactRepository.findById(id);
         if (optionalContact.isPresent()) {
             return optionalContact.get();
@@ -40,7 +40,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact updateContact(long id, Contact contact) {
+    public Contact updateContact(int id, Contact contact) {
         Contact existingContact = getContactById(id);
         existingContact.setPerson(contact.getPerson());
         existingContact.setPhoneNumber(contact.getPhoneNumber());
@@ -50,7 +50,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public String deleteContact(long id) {
+    public String deleteContact(int id) {
         Optional<Contact> optionalContact = contactRepository.findById(id);
         if (optionalContact.isPresent()) {
             contactRepository.deleteById(id);
@@ -59,4 +59,10 @@ public class ContactServiceImpl implements ContactService {
             return "Contact not found";
         }
     }
+
+//	@Override
+//	public Contact updateContact(int id, Contact contact) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getAddressById(long id) {
+    public Address getAddressById(int id) {
         Optional<Address> optionalAddress = AddressRepository.findById(id);
         if (optionalAddress.isPresent()) {
             return optionalAddress.get();
@@ -41,7 +41,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address updateAddress(long id, Address Address) {
+    public Address updateAddress(int id, Address Address) {
     		Address existingAddress = getAddressById(id);
             existingAddress.setStreetAddress(Address.getStreetAddress());
             existingAddress.setCity(Address.getCity());
@@ -54,7 +54,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public String deleteAddress(long id) {
+    public String deleteAddress(int id) {
         Optional<Address> optionalAddress = AddressRepository.findById(id);
         if (optionalAddress.isPresent()) {
             AddressRepository.deleteById(id);

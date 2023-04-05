@@ -33,7 +33,7 @@ public class EmailController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Email> getEmailById(@PathVariable long id) {
+    public ResponseEntity<Email> getEmailById(@PathVariable int id) {
         try {
             Email email = emailService.getEmailById(id);
             return ResponseEntity.ok(email);
@@ -48,7 +48,7 @@ public class EmailController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Email> updateEmail(@PathVariable long id, @RequestBody Email email) {
+    public ResponseEntity<Email> updateEmail(@PathVariable int id, @RequestBody Email email) {
         try {
             Email updatedEmail = emailService.updateEmail(id, email);
             return ResponseEntity.ok(updatedEmail);
@@ -58,7 +58,7 @@ public class EmailController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmail(@PathVariable long id) {
+    public ResponseEntity<String> deleteEmail(@PathVariable int id) {
         String result = emailService.deleteEmail(id);
         if (result.equals("Email is deleted")) {
             return ResponseEntity.ok(result);
