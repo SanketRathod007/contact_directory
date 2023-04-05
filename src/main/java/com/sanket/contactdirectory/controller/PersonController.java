@@ -42,11 +42,14 @@ public class PersonController {
         }
     }
     
-    @PostMapping(consumes = {"application/xml","application/json"})
+    @PostMapping
     public Person addPerson(@RequestBody Person person) {
+    	try {
     	person.setId(0l);
-    	System.out.println(person.toString());
-        return personService.addPerson(person);
+        return personService.addPerson(person);}
+    	catch(Exception e) {
+    		return null;
+    	}
     }
     
     @PutMapping("/{id}")

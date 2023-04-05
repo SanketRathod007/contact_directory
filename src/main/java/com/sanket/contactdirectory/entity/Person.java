@@ -54,7 +54,7 @@ public class Person {
         joinColumns = @JoinColumn(name = "person_id"),
         inverseJoinColumns = @JoinColumn(name = "address_id")
     )   
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Address> addresses;
 
 	
