@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "contacts")
 @JsonIdentityInfo(
-		  scope = Contact.class, 
+		  scope = Contact.class,
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
 public class Contact {
@@ -27,18 +28,18 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "person_id")
+    @ManyToOne
+    @JoinColumn(name = "person_id", nullable = false)
     @JsonBackReference
     private Person person;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "phone_type")
+    @Column(name = "phone_type", nullable = false)
     private String phoneType;
 
-    @Column(name = "is_primary_phone")
+    @Column(name = "is_primary_phone", nullable = false)
     private boolean isPrimaryPhone;
 
 	

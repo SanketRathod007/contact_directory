@@ -20,7 +20,7 @@ import jakarta.persistence.JoinColumn;
 @Entity
 @Table(name = "address")
 @JsonIdentityInfo(
-		  scope = Address.class, 
+		  scope = Address.class,
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
 public class Address {

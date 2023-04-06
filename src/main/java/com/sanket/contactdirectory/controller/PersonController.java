@@ -45,7 +45,6 @@ public class PersonController {
     @PostMapping
     public Person addPerson(@RequestBody Person person) {
     	try {
-    	person.setId(0l);
         return personService.addPerson(person);}
     	catch(Exception e) {
     		return null;

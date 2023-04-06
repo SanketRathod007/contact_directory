@@ -18,7 +18,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 @Table(name = "emails")
 @JsonIdentityInfo(
-		  scope = Email.class, 
+		  scope = Email.class,
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
 public class Email {
@@ -27,7 +27,7 @@ public class Email {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToOne
     @JoinColumn(name = "person_id")
     @JsonBackReference
     private Person person;

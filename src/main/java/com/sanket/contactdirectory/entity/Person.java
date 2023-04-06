@@ -22,7 +22,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 @Table(name = "person")
 @JsonIdentityInfo(
-		  scope = Person.class, 
+		  scope = Person.class,
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
 public class Person {
