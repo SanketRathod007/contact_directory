@@ -48,7 +48,7 @@ public class Person {
     @JsonManagedReference
     private List<Email> emails;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "person_address",
         joinColumns = @JoinColumn(name = "person_id"),

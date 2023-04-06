@@ -1,13 +1,14 @@
 package com.sanket.contactdirectory.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sanket.contactdirectory.dao.PersonRepository;
 import com.sanket.contactdirectory.entity.Person;
+import com.sanket.contactdirectory.repository.PersonRepository;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -62,5 +63,45 @@ public class PersonServiceImpl implements PersonService {
             return "Person doesn't exist";
         }
     }
+    
+    @Override
+    public List<Person> searchByFirstName(String firstname){
+    	List<Person> personList = new ArrayList<>();
+    	
+    	personList = personRepository.findByFirstnameContaining(firstname);
+    	
+    	if (!personList.isEmpty()) {
+    		return personList;
+        } else {
+            throw new IllegalArgumentException("Persons doesn't exist containing given firstname");
+        }
+    	
+    }
+
+	@Override
+	public List<Person> searchByLastName(String lastname) {
+		List<Person> personList = new ArrayList<>();
+    	
+    	personList = personRepository.findByLastnameContaining(lastname);
+    	
+    	if (!personList.isEmpty()) {
+    		return personList;
+        } else {
+            throw new IllegalArgumentException("Persons doesn't exist containing given lastname");
+        }
+	}
+
+	@Override
+	public List<Person> searchByGender(String gender) {
+		List<Person> personList = new ArrayList<>();
+    	
+    	personList = personRepository.findByGender(gender);
+    	
+    	if (!personList.isEmpty()) {
+    		return personList;
+        } else {
+            throw new IllegalArgumentException("Persons with given gender doesn't exist");
+        }
+	}
     
 }

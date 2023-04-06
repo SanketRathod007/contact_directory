@@ -1,5 +1,6 @@
 package com.sanket.contactdirectory.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanket.contactdirectory.entity.Email;
+import com.sanket.contactdirectory.entity.Person;
 import com.sanket.contactdirectory.service.EmailService;
 
 @RestController
@@ -40,6 +42,29 @@ public class EmailController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+    
+    @GetMapping("email/{email}")
+    public List<Person> searchByEmail(@PathVariable String email){
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return emailService.searchByEmailAddress(email);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
+    }
+    
+    @GetMapping("emailType/{emailType}")
+    public List<Person> searchByEmailType(@PathVariable String emailType){
+    	String emailTYpe = emailType.toLowerCase();
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return emailService.searchByEmailType(emailTYpe);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
     }
     
     @PostMapping

@@ -1,5 +1,6 @@
 package com.sanket.contactdirectory.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanket.contactdirectory.entity.Person;
@@ -32,7 +34,45 @@ public class PersonController {
         return personService.getAllPersons();
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("firstname/{firstname}")
+    public List<Person> searchByFirstName(@PathVariable String firstname){
+    	String firstName = firstname.toLowerCase();
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return personService.searchByFirstName(firstName);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
+    }
+    
+    @GetMapping("lastname/{lastname}")
+    public List<Person> searchByLastName(@PathVariable String lastname){
+    	String lastName = lastname.toLowerCase();
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return personService.searchByLastName(lastName);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
+    }
+    
+    @GetMapping("gender/{gender}")
+    public List<Person> searchByGender(@PathVariable String gender){
+    	String geNder = gender.toLowerCase();
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return personService.searchByGender(geNder);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
+    }
+    
+    
+    
+    @GetMapping("id/{id}")
     public ResponseEntity<Person> getPersonById(@PathVariable int id) {
         try {
             Person person = personService.getPersonById(id);

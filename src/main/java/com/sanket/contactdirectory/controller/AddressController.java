@@ -1,5 +1,6 @@
 package com.sanket.contactdirectory.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sanket.contactdirectory.entity.Address;
+import com.sanket.contactdirectory.entity.Person;
 import com.sanket.contactdirectory.service.AddressService;
 
 @RestController
@@ -30,6 +32,17 @@ public class AddressController {
     @GetMapping
     public List<Address> getAllAddresses() {
         return addressService.getAllAddresses();
+    }
+    
+    @GetMapping("address/{address}")
+    public List<Person> searchByEmail(@PathVariable String address){
+    	List<Person> personList = new ArrayList<>();
+    	personList.add(new Person());
+    	try {
+    		return addressService.searchByAddress(address);
+    	} catch (IllegalArgumentException e) {
+    		return personList;
+    	}	
     }
     
     @GetMapping("/{id}")

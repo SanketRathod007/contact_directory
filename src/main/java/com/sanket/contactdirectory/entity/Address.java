@@ -47,7 +47,7 @@ public class Address {
     @Column(name = "address_type")
     private String addressType;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany
     @JoinTable(
     		name = "person_address",
     		joinColumns = @JoinColumn(name = "address_id"),

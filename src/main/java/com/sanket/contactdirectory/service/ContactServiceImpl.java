@@ -1,13 +1,15 @@
 package com.sanket.contactdirectory.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sanket.contactdirectory.dao.ContactRepository;
 import com.sanket.contactdirectory.entity.Contact;
+import com.sanket.contactdirectory.entity.Person;
+import com.sanket.contactdirectory.repository.ContactRepository;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -59,10 +61,18 @@ public class ContactServiceImpl implements ContactService {
             return "Contact not found";
         }
     }
-
-//	@Override
-//	public Contact updateContact(int id, Contact contact) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+    
+    public List<Person> searchByphoneNumber(String phoneNumber){
+    	List<Person> personList = new ArrayList<>();
+      	
+	   	personList = contactRepository.findByphoneNumberContaining(phoneNumber);
+	   	
+	   	if (!personList.isEmpty()) {
+	   		return personList;
+	       } else {
+	           throw new IllegalArgumentException("Persons with given phonenumber doesn't exist");
+	       }
+		}
+    
 }
+

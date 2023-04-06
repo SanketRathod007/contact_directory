@@ -16,4 +16,9 @@ public interface PersonService {
     
     String deletePerson(int id);
     
+    List<Person> searchByFirstName(String firstname);
+    
+    List<Person> searchByLastName(String lastname);
+    
+    List<Person> searchByGender(String gender);
 }

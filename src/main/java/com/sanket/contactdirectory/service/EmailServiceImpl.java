@@ -1,13 +1,16 @@
 package com.sanket.contactdirectory.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sanket.contactdirectory.dao.EmailRepository;
 import com.sanket.contactdirectory.entity.Email;
+import com.sanket.contactdirectory.entity.Person;
+import com.sanket.contactdirectory.repository.EmailRepository;
+import com.sanket.contactdirectory.repository.PersonRepository;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -60,5 +63,31 @@ public class EmailServiceImpl implements EmailService {
             return "email doesn't exist";
         }
     }
-	
+    
+   public List<Person> searchByEmailAddress(String emailAddress){
+	    List<Person> personList = new ArrayList<>();
+   	
+	   	personList = emailRepository.findByEmailAddressContaining(emailAddress);
+	   	
+	   	if (!personList.isEmpty()) {
+	   		return personList;
+	       } else {
+	           throw new IllegalArgumentException("Persons with given email doesn't exist");
+	       }
+	}
+   
+   public List<Person> searchByEmailType(String emailType){
+	    List<Person> personList = new ArrayList<>();
+  	
+	   	personList = emailRepository.findByEmailAddressContaining(emailType);
+	   	
+	   	if (!personList.isEmpty()) {
+	   		return personList;
+	       } else {
+	           throw new IllegalArgumentException("Persons with given email type doesn't exist");
+	       }
+		}
+   
 }
+	
+
