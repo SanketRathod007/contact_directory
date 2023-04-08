@@ -10,7 +10,7 @@ import com.sanket.contactdirectory.entity.Person;
 
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 
-	@Query("select a.persons from Address a where "
+	@Query("select a.person from Address a where "
 			+ "(a.streetAddress like %?1%) "
 			+ "or (LOWER(a.city) like %?1%) "
 			+ "or (LOWER(a.state) like %?1%) "

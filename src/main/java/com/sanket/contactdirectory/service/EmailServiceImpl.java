@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.sanket.contactdirectory.entity.Email;
 import com.sanket.contactdirectory.entity.Person;
 import com.sanket.contactdirectory.repository.EmailRepository;
-import com.sanket.contactdirectory.repository.PersonRepository;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -40,7 +39,15 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public Email addEmail(Email email) {
-        return emailRepository.save(email);
+    	Email nullEmail = new Email();
+    	nullEmail.setEmailAddress("Duplicate Email Address");
+    	try {
+    		return emailRepository.save(email);
+    	}catch(Exception e) {
+    		e.getMessage();
+    		return nullEmail;
+    	}
+        
     }
 
     @Override

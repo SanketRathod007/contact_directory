@@ -13,9 +13,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 
@@ -48,13 +45,15 @@ public class Person {
     @JsonManagedReference
     private List<Email> emails;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "person_address",
-        joinColumns = @JoinColumn(name = "person_id"),
-        inverseJoinColumns = @JoinColumn(name = "address_id")
-    )   
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//        name = "person_address",
+//        joinColumns = @JoinColumn(name = "person_id"),
+//        inverseJoinColumns = @JoinColumn(name = "address_id")
+//    )   
 //    @JsonManagedReference
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Address> addresses;
 
 	

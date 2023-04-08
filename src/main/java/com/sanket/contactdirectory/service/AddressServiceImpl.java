@@ -51,7 +51,7 @@ public class AddressServiceImpl implements AddressService {
             existingAddress.setZipCode(Address.getZipCode());
             existingAddress.setCountry(Address.getCountry());
             existingAddress.setAddressType(Address.getAddressType());
-            existingAddress.setPersons(Address.getPersons());
+            existingAddress.setPerson(Address.getPerson());
             return addressRepository.save(existingAddress);
     }
 
@@ -74,7 +74,7 @@ public class AddressServiceImpl implements AddressService {
     		if (!personList.isEmpty()) {
     			return personList;
     		} else {
-	            throw new IllegalArgumentException("Persons with given phonenumber doesn't exist");
+	            throw new IllegalArgumentException("Persons with given address doesn't exist");
     		}
     }	
 

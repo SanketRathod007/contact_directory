@@ -38,7 +38,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person addPerson(Person person) {
-        return personRepository.save(person);
+    	try {
+    		return personRepository.save(person);
+    	}catch(Exception e) {
+    		Person nullPerson = new Person();
+    		nullPerson.setFirstName(e.getMessage() + " DUPLICATE ENTRY FOUND");
+    		e.getMessage();
+    		return nullPerson;
+    	}
+        
     }
 
     @Override

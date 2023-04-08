@@ -1,6 +1,6 @@
 package com.sanket.contactdirectory.MySQLJdbc;
 
-import java.sql.DriverManager;
+//import java.sql.DriverManager;
 
 public class PersonJdbcQueries {
 

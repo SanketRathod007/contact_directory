@@ -38,7 +38,15 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact addContact(Contact contact) {
-        return contactRepository.save(contact);
+    	Contact nullContact = new Contact();
+    	nullContact.setPhoneNumber("Duplicate phone number");
+    	try {
+    		return contactRepository.save(contact);
+    	}catch(Exception e) {
+    		e.getMessage();
+    		return nullContact;
+    	}
+        
     }
 
     @Override

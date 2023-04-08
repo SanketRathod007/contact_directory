@@ -1,20 +1,16 @@
 package com.sanket.contactdirectory.entity;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 @Entity
@@ -47,14 +43,17 @@ public class Address {
     @Column(name = "address_type")
     private String addressType;
 
-    @ManyToMany
-    @JoinTable(
-    		name = "person_address",
-    		joinColumns = @JoinColumn(name = "address_id"),
-    		inverseJoinColumns = @JoinColumn(name = "person_id")
-    )
+//    @ManyToMany
+//    @JoinTable(
+//    		name = "person_address",
+//    		joinColumns = @JoinColumn(name = "address_id"),
+//    		inverseJoinColumns = @JoinColumn(name = "person_id")
+//    )
+//    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "person_id", nullable = false)
     @JsonBackReference
-    private List<Person> persons;
+    private Person person;
 
 	
 
@@ -62,7 +61,7 @@ public class Address {
     public Address() {}
     
     public Address(String streetAddress, String city, String state, String zipCode, String country, String addressType,
-			List<Person> persons) {
+			Person person) {
 		super();
 		this.streetAddress = streetAddress;
 		this.city = city;
@@ -70,7 +69,7 @@ public class Address {
 		this.zipCode = zipCode;
 		this.country = country;
 		this.addressType = addressType;
-		this.persons = persons;
+		this.person = person;
 	}
 
     
@@ -131,12 +130,12 @@ public class Address {
 		this.addressType = addressType;
 	}
 
-	public List<Person> getPersons() {
-		return persons;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setPersons(List<Person> persons) {
-		this.persons = persons;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	
@@ -146,7 +145,7 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state
-				+ ", zipCode=" + zipCode + ", country=" + country + ", addressType=" + addressType + ", persons="
-				+ persons + "]";
+				+ ", zipCode=" + zipCode + ", country=" + country + ", addressType=" + addressType + ", person="
+				+ person + "]";
 	}
 }

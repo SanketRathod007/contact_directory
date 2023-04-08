@@ -34,12 +34,13 @@ public class AddressController {
         return addressService.getAllAddresses();
     }
     
-    @GetMapping("address/{address}")
-    public List<Person> searchByEmail(@PathVariable String address){
+    @GetMapping("addr/{address}")
+    public List<Person> searchByAddress(@PathVariable String address){
+    	String addrEss = address.toLowerCase();
     	List<Person> personList = new ArrayList<>();
     	personList.add(new Person());
     	try {
-    		return addressService.searchByAddress(address);
+    		return addressService.searchByAddress(addrEss);
     	} catch (IllegalArgumentException e) {
     		return personList;
     	}	
